@@ -5,11 +5,15 @@ import datetime
 import plotly.graph_objects as go
 import plotly.express as px
 import talib
+import requests
 
 # Step 1: Load in the neccesary Cache data
 @st.cache_data
+
 def get_sp500_components():
-    df = pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
+    sp500_url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+    df = requests.geT(sp500_url, headers)
     df = df[0]
     tickers = df['Symbol']
     tickers_companies_dict = dict(zip(df['Symbol'], df['Security']))
