@@ -12,8 +12,7 @@ import requests
 
 def get_sp500_components():
     sp500_url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
-    response = requests.get(sp500_url, headers=headers)
+    response = requests.get(sp500_url)
     df = pd.read_html(response.text)
     df = df[0]
     tickers = df['Symbol']
